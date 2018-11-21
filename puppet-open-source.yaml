@@ -1,13 +1,23 @@
-inputs:
-  hostname:
-    type: string
+inputs: {}
 resources:
+  Cloud_LoadBalancer_1:
+    type: Cloud.LoadBalancer
+    properties:
+      name: WebLB
+      routes:
+        - port: '80'
+          protocol: http
+          instancePort: '80'
+          instanceProtocol: http
+      network: '${Cloud_Network_1.name}'
+      instances:
+        - '${Cloud_Machine_1.id}'
+      internetFacing: false
   Cloud_Machine_1:
     type: Cloud.Machine
     properties:
       cloudConfig: |
         #cloud-config
-        hostname: ${input.hostname}
         package:
           - wget
           - git
@@ -16,21 +26,20 @@ resources:
           - dpkg -i puppet6-release-xenial.deb
           - apt-get update
           - apt-get install puppet -y
-          - git clone -b https://github.com/codyde/puppet-demoapp /puppet-demoapp
+          - git clone -b puppet https://github.com/codyde/puppet-demoapp /puppet-demoapp
           - puppet apply --parser future /puppet-demoapp/plans/bootcampapp.pp --debug
           - systemctl restart nginx
       constraints:
-        - tag: 'cloud:aws'
+        - tag: 'cloud:vsphere'
       image: Ubuntu
       flavor: medium
-      hostname: '${input.hostname}'
       networks:
         - name: '${Cloud_Network_1.name}'
           assignment: static
   Cloud_Network_1:
     type: Cloud.Network
     properties:
-      name: Default-AWS
-      networkType: existing
+      name: Core
       constraints:
-        - tag: 'cloud:aws'
+        - tag: 'vsphere:compute'
+      networkType: existing
