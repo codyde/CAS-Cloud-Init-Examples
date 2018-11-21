@@ -1,0 +1,36 @@
+inputs:
+  username:
+    type: string
+    title: Username
+  sshkey:
+    type: string
+    title: SSHKey
+    encrypted: true
+resources:
+  web1:
+    type: Cloud.Machine
+    networks:
+      - name: '${Cloud_Network_1.name}'
+    properties:
+      count: 1
+      image: Ubuntu
+      constraints:
+        - tag: 'cloud:vsphere'
+      flavor: medium
+      cloudConfig: |
+        #cloud-config
+        users:
+          - name: ${input.username}
+            ssh_authorized_keys:
+              - ${input.sshkey}
+            passwd: ${input.password}
+            sudo: ['ALL=(ALL) NOPASSWD:ALL']
+            groups: [wheel, sudo, admin]
+            shell: '/bin/bash'
+      networks:
+        - name: '${AppNetwork.name}'
+  AppNetwork:
+    type: Cloud.Network
+    properties:
+      name: Core
+      networkType: existing
