@@ -1,8 +1,19 @@
-A few examples of Blueprints that can be used in VMware Cloud Assembly specifically pertaining to Cloud-Init and application level customization 
+# Sample Cloud Automation Services YAML Blueprints 
 
-3-Samples are provided
+## Custom User Pass 
+Blueprint designed to take an input for username and password and push it into the Linux Guest OS using cloud-init 
 
-* A sample that deploys postgres and configures a specific database and its schema 
-* A sample where we clone a git repo and run an Open Source Puppet manifest 
-* An example where we push a custom user to the machine, along with a username and password. We also enable password based authentication. 
+## Custom User SSH 
+Blueprint designed to take inputs of both username and ssh key and push it into the Linux Guest OS using cloud-init 
 
+## Postgres Custom Database
+Blueprint designed to deploy postgres and then inject a specific database schema as well as allow database to be connected to remotely
+
+## Puppet Bolt DNS 
+Blueprint designed to install Puppet Bolt and use it to push a DNS reservation into remote Microsoft DNS. Static values are used for now...
+
+## Puppet Enterprise Web
+Blueprint for consuming Puppet enterprise web. Also has configurations for user data in it. 
+
+## Puppet Open Source 
+Blueprint designed to install Puppet OSS and execute a manifest stored in a Github
