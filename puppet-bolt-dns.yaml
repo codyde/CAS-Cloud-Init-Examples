@@ -1,0 +1,39 @@
+inputs:
+  hostname:
+    type: string
+  windowsAdmin:
+    type: string
+  password:
+    type: string
+    encrypted: true
+resources:
+  web1:
+    type: Cloud.Machine
+    networks:
+      - name: '${Cloud_Network_1.name}'
+    properties:
+      image: Ubuntu
+      constraints:
+        - tag: 'cloud:vsphere'
+      flavor: medium
+      cloudConfig: |
+        #cloud-config
+        hostname: ${input.hostname}
+        packages:
+          - wget
+        runcmd:
+          - wget https://apt.puppet.com/puppet6-release-xenial.deb
+          - sudo dpkg -i puppet6-release-xenial.deb
+          - sudo apt-get update 
+          - sudo apt-get install puppet-bolt
+          - git clone https://github.com/codyde/Windows-dns /opt/puppetlabs/bolt/lib/ruby/gems/2.5.0/gems/bolt-1.0.0/modules/dns
+          - '/usr/local/bin/bolt task run --nodes winrm://humbledc01.humblelab.com --user ${input.windowsAdmin} --password ${input.password} --no-ssl dns::dns hostname=${input.hostname} domain="humblelab.com" ip="10.0.0.0"'
+      networks:
+        - name: '${Cloud_Network_1.name}'
+  Cloud_Network_1:
+    type: Cloud.Network
+    properties:
+      name: Core
+      networkType: existing
+      constraints:
+        - tag: 'cloud:vsphere'
