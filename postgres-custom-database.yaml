@@ -4,8 +4,8 @@ resources:
     type: Cloud.Machine
     properties:
       constraints:
-        - tag: 'cloud:vsphere'
-      image: CentOS 7.5
+        - tag: 'cloud:aws'
+      image: Ubuntu
       flavor: small
       networks:
         - name: '${Default.name}'
