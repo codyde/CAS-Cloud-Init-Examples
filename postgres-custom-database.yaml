@@ -9,6 +9,7 @@ resources:
       flavor: small
       networks:
         - name: '${Default.name}'
+          assignment: static
       cloudConfig: |
         #cloud-config
         packages:
@@ -40,4 +41,4 @@ resources:
       name: Default
       networkType: existing
       constraints:
-        - tag: 'cloud:vsphere'
+        - tag: 'vsphere:compute'
