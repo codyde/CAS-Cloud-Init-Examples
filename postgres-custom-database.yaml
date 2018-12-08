@@ -6,7 +6,7 @@ resources:
       constraints:
         - tag: 'cloud:aws'
       image: Ubuntu
-      flavor: small
+      flavor: medium
       networks:
         - name: '${Default.name}'
       cloudConfig: |
