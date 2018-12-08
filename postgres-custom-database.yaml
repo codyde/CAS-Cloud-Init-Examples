@@ -4,7 +4,7 @@ resources:
     type: Cloud.Machine
     properties:
       constraints:
-        - tag: 'cloud:aws'
+        - tag: 'cloud:vsphere'
       image: Ubuntu
       flavor: small
       networks:
@@ -40,4 +40,4 @@ resources:
       name: Default
       networkType: existing
       constraints:
-        - tag: 'cloud:aws'
+        - tag: 'cloud:vsphere'
