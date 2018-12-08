@@ -36,6 +36,15 @@ resources:
       flavor: medium
       networks:
         - name: '${Cloud_Network_1.name}'
+  Cloud_Machine_2:
+    type: Cloud.Machine
+    properties:
+      constraints:
+        - tag: 'cloud:aws'
+      image: Ubuntu
+      flavor: medium
+      networks:
+        - name: '${Cloud_Network_1.name}'
   Cloud_Network_1:
     type: Cloud.Network
     properties:
