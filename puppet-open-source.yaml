@@ -16,7 +16,7 @@ resources:
   Cloud_Machine_1:
     type: Cloud.Machine
     properties:
-      count: 2
+      count: 1
       cloudConfig: |
         #cloud-config
         package:
@@ -30,15 +30,6 @@ resources:
           - git clone -b puppet https://github.com/codyde/puppet-demoapp /puppet-demoapp
           - puppet apply --parser future /puppet-demoapp/plans/bootcampapp.pp --debug
           - systemctl restart nginx
-      constraints:
-        - tag: 'cloud:aws'
-      image: Ubuntu
-      flavor: medium
-      networks:
-        - name: '${Cloud_Network_1.name}'
-  Cloud_Machine_2:
-    type: Cloud.Machine
-    properties:
       constraints:
         - tag: 'cloud:aws'
       image: Ubuntu
