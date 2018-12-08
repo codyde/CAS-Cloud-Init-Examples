@@ -16,6 +16,7 @@ resources:
   Cloud_Machine_1:
     type: Cloud.Machine
     properties:
+      count: 2
       cloudConfig: |
         #cloud-config
         package:
