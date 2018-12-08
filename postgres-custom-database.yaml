@@ -5,7 +5,7 @@ resources:
     properties:
       constraints:
         - tag: 'cloud:vsphere'
-      image: Ubuntu
+      image: CentOS 7.5
       flavor: small
       networks:
         - name: '${Default.name}'
