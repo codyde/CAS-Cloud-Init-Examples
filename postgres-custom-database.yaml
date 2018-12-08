@@ -40,4 +40,4 @@ resources:
       name: Default
       networkType: existing
       constraints:
-        - tag: 'vsphere:compute''
+        - tag: 'vsphere:compute'
