@@ -7,8 +7,6 @@ resources:
         - tag: 'cloud:aws'
       image: Ubuntu
       flavor: medium
-      networks:
-        - name: '${Default.name}'
       cloudConfig: |
         #cloud-config
         packages:
