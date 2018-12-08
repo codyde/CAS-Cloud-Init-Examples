@@ -4,12 +4,11 @@ resources:
     type: Cloud.Machine
     properties:
       constraints:
-        - tag: 'cloud:vspheremgt'
+        - tag: 'cloud:vsphere'
       image: CentOS 7.5
       flavor: small
       networks:
         - name: '${Default.name}'
-          assignment: static
       cloudConfig: |
         #cloud-config
         packages:
@@ -35,10 +34,3 @@ resources:
           - echo "host    all    all       0.0.0.0/0   md5" >> /etc/postgresql/9.5/main/pg_hba.conf
           - echo "listen_addresses = '*'" >> /etc/postgresql/9.5/main/postgresql.conf
           - [ systemctl, start, postgresql.service ]
-  Default:
-    type: Cloud.Network
-    properties:
-      name: Default
-      networkType: existing
-      constraints:
-        - tag: 'vsphere:compute'
