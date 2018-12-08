@@ -35,7 +35,6 @@ resources:
       flavor: medium
       networks:
         - name: '${Cloud_Network_1.name}'
-          assignment: static
   Cloud_Network_1:
     type: Cloud.Network
     properties:
